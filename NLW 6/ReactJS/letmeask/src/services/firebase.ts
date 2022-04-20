@@ -1,7 +1,8 @@
 import firebase, { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, getAuth } from'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database"
 
-import 'firebase/database';
+import 'firebase/database'
 
 const firebaseConfig = {
     apiKey: "AIzaSyCEpH4iKGmZkB2vPc_ArydiyIwg3DdGFGQ",
@@ -15,12 +16,16 @@ const firebaseConfig = {
   
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-
-  const auth = getAuth();
-  //export const auth = app.auth();
+  //firebase.initializeApp(firebaseConfig);
 
 
-  
+  export const auth = getAuth();
+  export const database = getDatabase();
+/*   export const auth = firebase.auth();
+  export const database = firebase.database(); */
+
+
+
   /* createUserWithEmailAndPassword(auth, "email", password)
   .then((userCredential) => {
     // Signed in
@@ -32,4 +37,3 @@ const firebaseConfig = {
     const errorMessage = error.message;
     // ..
   }); */
-  export const database = app.database();
