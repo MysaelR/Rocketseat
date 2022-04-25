@@ -1,0 +1,37 @@
+
+
+.button{
+    margin-top: 64px;
+        height: 50px;
+        border-radius: 8px;
+        font-weight: 500;
+        background-color: #835afd;
+        color: #FFF;
+        padding: 0 32px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+        border: 0;
+
+        transition: filter 0.2s;
+
+        img{
+            margin-right: 8px;
+        }
+
+        &:not(:disabled):hover{ //Só vai aplicar o efeito se o botão não estiver desabilitado
+            filter: brightness(0.9);
+
+
+        }
+
+
+        &:disabled{ //quanto este botão estiver com a opção desabled, vou diminuir a opacidade dele, e colocar o cursor para não permitido
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+}
