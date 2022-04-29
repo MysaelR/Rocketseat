@@ -5,26 +5,23 @@ import { Button } from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup, } from "firebase/auth";
 import { getDatabase } from "firebase/database"
-import { testContext } from '../App';
-import { useContext } from 'react';
-
 import '../styles/auth.scss';
+import { useAuth } from '../hooks/useAuth';
+
 
 export function Home() {
 
+    const { user, signInWithGoogle } = useAuth();
+
     let navigate = useNavigate();
-    const { value, setValue } = useContext(testContext);
+
 
     async function handleCreateRoom() {
 
-        const auth = getAuth();
-        const provider = new GoogleAuthProvider();
-        const result = await signInWithPopup(auth, provider).then(result => {
-            console.log(result);
-
-
-        })
-
+        if (!user) {
+            await signInWithGoogle()
+        }
+        navigate('rooms/new')
 
 
         /* console.log(result); */
@@ -39,10 +36,10 @@ export function Home() {
                 <p>Tire as dúvidas da sua audiência em tempo-real</p>
             </aside>
             <main>
-                <h1>{value}</h1>
+
                 <div className='main-content'>
                     <img src={logoImg} alt="logo Letmeask" />
-                    <button onClick={() => navigate('rooms/new')} className='create-room'>
+                    <button onClick={handleCreateRoom} className='create-room'>
                         <img src={googleIconImg} alt="Logo do Google" />
                         Crie sua sala com o Google
                     </button>
